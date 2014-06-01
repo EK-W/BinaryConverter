@@ -33,7 +33,6 @@ public static void main(String[] args){
 	MathyStuff db = new MathyStuff();
 	db.setSize((int)dim.getWidth(),(int) dim.getHeight());
 	fr.add(db);
-	fr.setFocusable(true);
 	fr.setVisible(true);
 	fr.setResizable(false);	
 }
@@ -60,7 +59,7 @@ g.drawString(String.valueOf(Keys.mouseLoc.getY()),10,30);
 public void addNotify(){
 super.addNotify();
 addMouseListener(util);
-
+setFocusable(true);
 addMouseMotionListener(util);
 animate.start();
 addKeyListener(this);
@@ -68,13 +67,9 @@ addKeyListener(this);
 
 @Override
 public void keyPressed(KeyEvent e) {
-	int id = e.getID();
-	if (id == KeyEvent.KEY_TYPED) {
-	char c = e.getKeyChar();
-	displayNum=join(displayNum,c);
-	}else if(e.getKeyCode()==KeyEvent.VK_DELETE){
-	displayNum=displayNum.substring(0,displayNum.length()-1);
-	}
+if(e.getKeyCode()==KeyEvent.VK_BACK_SPACE){
+displayNum=displayNum.substring(0,displayNum.length()-1);
+}
 }
 
 @Override
@@ -86,8 +81,6 @@ int id = e.getID();
 if (id == KeyEvent.KEY_TYPED) {
 char c = e.getKeyChar();
 displayNum=join(displayNum,c);
-}else if(e.getKeyCode()==KeyEvent.VK_DELETE){
-displayNum=displayNum.substring(0,displayNum.length()-1);
 }
 }
 
